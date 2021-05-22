@@ -18,24 +18,24 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @Slf4j
 public class ExceptionAdvice extends ResponseEntityExceptionHandler {
     @ExceptionHandler(Exception.class)
-    public final ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
+    protected ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
         log.error("Generic exception found with message : {}", ex.getMessage());
         ErrorResponse error = new ErrorResponse("Generic Exception", ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
     @ExceptionHandler(BadRequestException.class)
-    public final ResponseEntity<Object> handleUserNotFoundException(BadRequestException ex, WebRequest request) {
+    protected ResponseEntity<ErrorResponse> handleUserNotFoundException(BadRequestException ex, WebRequest request) {
         log.error("Bad request with message : {} and code : {}", ex.getMessage(), ex.getCode());
         ErrorResponse error = new ErrorResponse(ex.getCode(), ex.getMessage(), ex.getHttpStatus());
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        return ResponseEntity.status(ex.getHttpStatus()).body(error);
     }
 
     @ExceptionHandler(ResourceNotFoundException.class)
-    public final ResponseEntity<Object> handleUserNotFoundException(ResourceNotFoundException ex, WebRequest request) {
+    protected ResponseEntity<ErrorResponse> handleUserNotFoundException(ResourceNotFoundException ex, WebRequest request) {
         log.error("Resource not found with message : {} and code : {}", ex.getMessage(), ex.getCode());
         ErrorResponse error = new ErrorResponse(ex.getCode(), ex.getMessage(), ex.getHttpStatus());
-        return new ResponseEntity<>(error, HttpStatus.NO_CONTENT);
+        return ResponseEntity.status(ex.getHttpStatus()).body(error);
     }
 
     @ExceptionHandler(value = ConstraintViolationException.class)

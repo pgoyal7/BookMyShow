@@ -6,7 +6,10 @@ import com.book.my.show.response.TheatreResponse;
 import com.book.my.show.service.impl.TheatreService;
 import com.book.my.show.util.Constants;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 
@@ -39,10 +42,10 @@ public class TheatreController {
                 .ok().body(theatreService.getAuditoriumsAndShowsByTheatreAndCity(theatreName.toUpperCase(), cityName.toUpperCase()));
     }
 
-    @GetMapping("/ext/v1/city/{cityName}/theatres/{theatreName}/movies/{movieName}/shows/{showTime}")
+    @GetMapping("/ext/v1/city/{cityName}/theatres/{theatreName}/movies/{movieName}/shows/{showTime}/showDates/{showDate}")
     public ResponseEntity<AvailableSeatResponse> getAvailableSeats(@PathVariable("cityName") String cityName,
                                                                    @PathVariable("theatreName") String theatreName, @PathVariable("movieName") String movieName,
-                                                                   @PathVariable("showTime") String showTime, @RequestParam("showDay") String showDate) {
+                                                                   @PathVariable("showTime") String showTime, @PathVariable("showDate") String showDate) {
         return ResponseEntity
                 .ok().body(theatreService.getAvailableSeats(cityName.toUpperCase(), theatreName.toUpperCase(),
                         movieName.toUpperCase(), showTime.toUpperCase(), LocalDate.parse(showDate, Constants.formatter)));
