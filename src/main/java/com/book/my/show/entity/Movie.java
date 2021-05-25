@@ -3,10 +3,14 @@ package com.book.my.show.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
+@Accessors(chain = true)
 @Setter
 @Getter
 @NoArgsConstructor

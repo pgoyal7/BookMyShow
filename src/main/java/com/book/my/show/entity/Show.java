@@ -3,10 +3,12 @@ package com.book.my.show.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.util.*;
 
+@Accessors(chain = true)
 @Setter
 @Getter
 @NoArgsConstructor

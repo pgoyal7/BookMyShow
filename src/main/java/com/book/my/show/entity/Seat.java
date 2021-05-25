@@ -1,16 +1,17 @@
 package com.book.my.show.entity;
 
-import com.book.my.show.type.SeatStatus;
 import com.book.my.show.type.SeatType;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Accessors(chain = true)
 @Setter
 @Getter
 @NoArgsConstructor

@@ -4,12 +4,13 @@ import com.book.my.show.type.SeatStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Accessors(chain = true)
 @Setter
 @Getter
 @NoArgsConstructor
@@ -27,7 +28,7 @@ public class BookShowSeat extends BaseEntity{
     @Column(name = "seat_book_time")
     private LocalDateTime bookTime;
     @Column(name = "show_day")
-    private LocalDate showDay;
+    private String showDay;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "seat_id", referencedColumnName = "id")

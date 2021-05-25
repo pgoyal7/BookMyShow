@@ -15,6 +15,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @MappedSuperclass
 public abstract class BaseEntity implements Serializable {
+    private static final long serialVersionUID = 5004711179355651018L;
+
     private String createdBy;
     private String updatedBy;
     private LocalDateTime createdOn;

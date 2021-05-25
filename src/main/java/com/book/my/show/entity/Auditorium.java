@@ -3,6 +3,7 @@ package com.book.my.show.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.util.*;
@@ -45,22 +46,6 @@ public class Auditorium extends BaseEntity {
         seat.setAuditorium(this);
     }
 
-
-   /* @OneToMany(orphanRemoval = true, mappedBy = "auditorium", cascade = CascadeType.ALL)
-    private List<Show> shows = new ArrayList<>();
-
-    //Add Show
-    public void addShow(Show show) {
-        shows.remove(show);
-        show.setAuditorium(null);
-    }
-
-    //Remove Show
-    public void removeShow(Show show) {
-        shows.remove(show);
-        show.setAuditorium(null);
-    }
-*/
     @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinTable(name = "auditorium_show", joinColumns = @JoinColumn(name = "auditorium_id"),
             inverseJoinColumns = @JoinColumn(name = "show_id"))

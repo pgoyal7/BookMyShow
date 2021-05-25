@@ -3,12 +3,14 @@ package com.book.my.show.entity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Accessors(chain = true)
 @Setter
 @Getter
 @NoArgsConstructor
@@ -22,13 +24,15 @@ public class User extends BaseEntity {
     private Long id;
     @Column(name = "user_name")
     private String name;
+    @Column(name = "user_id")
+    private String userId;
     @Column(name = "user_email")
     private String email;
     @Column(name = "mobile_number")
     private String mobileNumber;
 
     @OneToMany(orphanRemoval = true, mappedBy = "user", cascade = CascadeType.ALL)
-    private List<Ticket> tickets = new ArrayList<>();
+    private final List<Ticket> tickets = new ArrayList<>();
 
     //Add ticket
     public void addTicket(Ticket ticket) {
