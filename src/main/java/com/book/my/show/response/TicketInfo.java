@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
-import java.io.Serializable;
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -14,8 +13,13 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
-public class AvailableSeatResponse implements Serializable {
-    private static final long serialVersionUID = 2430515445933391010L;
-
-    private List<SeatInfo> seats;
+public class TicketInfo {
+    private String theatreName;
+    private String movieName;
+    private String auditoriumName;
+    private String ticketId;
+    private double ticketAmount;
+    private String showDay;
+    private String showTime;
+    private List<SeatInfo> seatInfoList;
 }

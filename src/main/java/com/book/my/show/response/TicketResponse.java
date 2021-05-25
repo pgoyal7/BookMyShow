@@ -14,8 +14,8 @@ import java.util.List;
 @Setter
 @Getter
 @NoArgsConstructor
-public class AvailableSeatResponse implements Serializable {
-    private static final long serialVersionUID = 2430515445933391010L;
+public class TicketResponse implements Serializable {
+    private static final long serialVersionUID = 3441396655395362561L;
 
-    private List<SeatInfo> seats;
+    private List<TicketInfo> ticketInfoList;
 }
