@@ -1,19 +1,24 @@
 package com.book.my.show.cron;
 
-import com.book.my.show.respository.BookShowSeatRepository;
+import com.book.my.show.repository.BookShowSeatRepository;
+import com.book.my.show.service.ICronService;
+import com.book.my.show.type.SeatStatus;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
 
 @Slf4j
+@Component
 public class BMSScheduler {
-    private final BookShowSeatRepository bookShowSeatRepository;
+    private final ICronService cronService;
 
-    public BMSScheduler(BookShowSeatRepository bookShowSeatRepository) {
-        this.bookShowSeatRepository = bookShowSeatRepository;
+    public BMSScheduler(ICronService cronService) {
+        this.cronService = cronService;
     }
 
-    @Scheduled(initialDelayString = "1000", fixedDelayString = "1000")
+    //@Scheduled(initialDelayString = "1000", fixedDelayString = "1000")
     public void makeBlockedSeatBackToOpenState() {
-        System.out.print("Helo----------"); //pageable impelment
+        cronService.unblockSeatsIfThresholdExceed(SeatStatus.BLOCKED, LocalDateTime.now());
     }
 }
