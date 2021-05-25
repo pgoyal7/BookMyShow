@@ -1,0 +1,13 @@
+# application level exclusion
+*.log
+*.gz
+target
+
+# maven level exclusion
+*.cmd
+mvnw
+*.md
+
+# intellij level exclusion
+*.idea
+*.iml
