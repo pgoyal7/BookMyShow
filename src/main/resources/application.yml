@@ -3,7 +3,7 @@ logging:
 
 spring:
   application:
-    name: @project.artifactId@
+    name: BookMyShow
 
   h2:
     console:
