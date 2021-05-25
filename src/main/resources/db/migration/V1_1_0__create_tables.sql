@@ -69,13 +69,16 @@ CREATE TABLE IF NOT EXISTS `show` (
 CREATE TABLE IF NOT EXISTS `user` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `user_name` varchar(20),
+    `user_id` varchar(20),
     `user_email` varchar(50),
     `mobile_number` varchar(13),
     `created_by` varchar(50),
     `created_on` timestamp,
     `updated_by` varchar(50),
     `updated_on` timestamp,
-    PRIMARY KEY(`id`)
+    PRIMARY KEY(`id`),
+    CONSTRAINT uk_user_name UNIQUE(`user_name`),
+    CONSTRAINT uk_user_id UNIQUE(`user_id`)
 );
 
 CREATE TABLE IF NOT EXISTS `ticket` (
@@ -114,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `book_show_seat` (
     `ticket_id` INTEGER,
     `seat_status` varchar(20) NOT NULL,
     `seat_book_time` timestamp,
-    `show_day` DATE NOT NULL,
+    `show_day` varchar(12) NOT NULL,
     `version` INTEGER,
     `created_by` varchar(50),
     `created_on` timestamp NOT NULL,
