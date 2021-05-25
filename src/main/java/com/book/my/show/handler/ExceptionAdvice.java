@@ -1,7 +1,8 @@
 package com.book.my.show.handler;
 
 import com.book.my.show.exception.BadRequestException;
-import com.book.my.show.exception.ResourceNotFoundException;
+import com.book.my.show.exception.BookingNotPossibleException;
+import com.book.my.show.exception.ContentNotFoundException;
 import com.book.my.show.response.ErrorResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.exception.ConstraintViolationException;
@@ -21,21 +22,28 @@ public class ExceptionAdvice extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
         log.error("Generic exception found with message : {}", ex.getMessage());
         ErrorResponse error = new ErrorResponse("Generic Exception", ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
-        return new ResponseEntity<>(error, HttpStatus.INTERNAL_SERVER_ERROR);
+        return handleExceptionInternal(ex, error, new HttpHeaders(),HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
     @ExceptionHandler(BadRequestException.class)
-    protected ResponseEntity<ErrorResponse> handleUserNotFoundException(BadRequestException ex, WebRequest request) {
+    protected ResponseEntity<Object> handleBadRequestException(BadRequestException ex, WebRequest request) {
         log.error("Bad request with message : {} and code : {}", ex.getMessage(), ex.getCode());
         ErrorResponse error = new ErrorResponse(ex.getCode(), ex.getMessage(), ex.getHttpStatus());
-        return ResponseEntity.status(ex.getHttpStatus()).body(error);
+        return handleExceptionInternal(ex, error, new HttpHeaders(), ex.getHttpStatus(), request);
     }
 
-    @ExceptionHandler(ResourceNotFoundException.class)
-    protected ResponseEntity<ErrorResponse> handleUserNotFoundException(ResourceNotFoundException ex, WebRequest request) {
-        log.error("Resource not found with message : {} and code : {}", ex.getMessage(), ex.getCode());
+    @ExceptionHandler(ContentNotFoundException.class)
+    protected ResponseEntity<Object> handleContentNotFoundException(ContentNotFoundException ex, WebRequest request) {
+        log.error("Content not found with message : {} and code : {}", ex.getMessage(), ex.getCode());
         ErrorResponse error = new ErrorResponse(ex.getCode(), ex.getMessage(), ex.getHttpStatus());
-        return ResponseEntity.status(ex.getHttpStatus()).body(error);
+        return handleExceptionInternal(ex, error, new HttpHeaders(), ex.getHttpStatus(), request);
+    }
+
+    @ExceptionHandler(BookingNotPossibleException.class)
+    protected ResponseEntity<Object> handleBookingNotPossibleException(BookingNotPossibleException ex, WebRequest request) {
+        log.error("Booking not possible with message : {} and code : {}", ex.getMessage(), ex.getCode());
+        ErrorResponse error = new ErrorResponse(ex.getCode(), ex.getMessage(), ex.getHttpStatus());
+        return handleExceptionInternal(ex, error, new HttpHeaders(), ex.getHttpStatus(), request);
     }
 
     @ExceptionHandler(value = ConstraintViolationException.class)

@@ -1,11 +1,13 @@
 package com.book.my.show.exception;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.http.HttpStatus;
 
 @Setter
 @Getter
+@NoArgsConstructor
 public class BaseException extends RuntimeException {
 
     private static final long serialVersionUID = -8426651156862539933L;
