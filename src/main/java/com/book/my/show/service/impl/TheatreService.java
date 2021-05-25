@@ -1,33 +1,32 @@
 package com.book.my.show.service.impl;
 
-import com.book.my.show.dto.SeatDTO;
+import com.book.my.show.response.SeatInfo;
 import com.book.my.show.entity.Auditorium;
 import com.book.my.show.entity.Seat;
 import com.book.my.show.entity.Show;
 import com.book.my.show.entity.Theatre;
 import com.book.my.show.exception.ErrorMapping;
-import com.book.my.show.exception.ResourceNotFoundException;
+import com.book.my.show.exception.ContentNotFoundException;
 import com.book.my.show.response.AvailableSeatResponse;
 import com.book.my.show.response.RunningShow;
 import com.book.my.show.response.RunningShowResponse;
 import com.book.my.show.response.TheatreResponse;
-import com.book.my.show.respository.AuditoriumRepository;
-import com.book.my.show.respository.SeatRepository;
-import com.book.my.show.respository.TheatreRepository;
-import com.book.my.show.respository.specification.AuditoriumSpecification;
-import com.book.my.show.respository.specification.SeatSpecification;
-import com.book.my.show.respository.specification.TheatreSpecification;
+import com.book.my.show.repository.AuditoriumRepository;
+import com.book.my.show.repository.SeatRepository;
+import com.book.my.show.repository.TheatreRepository;
+import com.book.my.show.repository.specification.AuditoriumSpecification;
+import com.book.my.show.repository.specification.SeatSpecification;
+import com.book.my.show.repository.specification.TheatreSpecification;
 import com.book.my.show.service.ITheatreService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Service("bookService")
+@Service
 @Slf4j
 public class TheatreService implements ITheatreService {
 
@@ -45,8 +44,6 @@ public class TheatreService implements ITheatreService {
     @Cacheable("Theatres")
     @Override
     public TheatreResponse getTheatresByCity(String cityName) {
-        log.info("");//Aspect add for logging
-
         TheatreSpecification theatreSpecification = TheatreSpecification
                 .builder()
                 .cityName(cityName)
@@ -58,7 +55,8 @@ public class TheatreService implements ITheatreService {
                     .setTheatres(theatres.stream().map(Theatre::getName).collect(Collectors.toList()));
         }
 
-        throw new ResourceNotFoundException(HttpStatus.NO_CONTENT, ErrorMapping.BMS001);
+        log.info("No theatre is present in {}", cityName);
+        throw new ContentNotFoundException(HttpStatus.OK, ErrorMapping.BMS001);
     }
 
     @Cacheable("Theatres")
@@ -75,8 +73,8 @@ public class TheatreService implements ITheatreService {
                     .setTheatres(theatres.stream().map(Theatre::getName)
                             .collect(Collectors.toList()));
         }
-
-        throw new ResourceNotFoundException(HttpStatus.NO_CONTENT, ErrorMapping.BMS002);
+        log.info("No theatre is showing movie {} in {}", movieName, cityName);
+        throw new ContentNotFoundException(HttpStatus.OK, ErrorMapping.BMS002);
     }
 
     @Cacheable("RunningShows")
@@ -99,12 +97,13 @@ public class TheatreService implements ITheatreService {
                             .collect(Collectors.toList()));
         }
 
-        throw new ResourceNotFoundException(HttpStatus.NO_CONTENT, ErrorMapping.BMS003);
+        log.info("Theatre {} is not running any show in {}", theatreName, cityName);
+        throw new ContentNotFoundException(HttpStatus.OK, ErrorMapping.BMS003);
     }
 
     @Cacheable("AvailableSeats")
     @Override
-    public AvailableSeatResponse getAvailableSeats(String cityName, String theatreName, String movieName, String showTime, LocalDate showDay) {
+    public AvailableSeatResponse getAvailableSeats(String cityName, String theatreName, String movieName, String showTime, String showDay) {
         SeatSpecification seatSpecification = SeatSpecification.builder()
                 .cityName(cityName)
                 .theatreName(theatreName)
@@ -116,12 +115,13 @@ public class TheatreService implements ITheatreService {
         List<Seat> seats = seatRepository.findAll(seatSpecification);
         if(seats.size() != 0) {
             return new AvailableSeatResponse()
-                    .setSeats(seats.stream().map((seat) -> new SeatDTO()
+                    .setSeats(seats.stream().map((seat) -> new SeatInfo()
                             .setSeatName(seat.getName())
                             .setSeatType(seat.getSeatType()))
                             .collect(Collectors.toList()));
         }
 
-        throw new ResourceNotFoundException(HttpStatus.NO_CONTENT, ErrorMapping.BMS004);
+        log.info("Theatre {} is running {} movie on {} at {} with no seat vacancy", theatreName, movieName, showDay, showTime);
+        throw new ContentNotFoundException(HttpStatus.OK, ErrorMapping.BMS004);
     }
 }
