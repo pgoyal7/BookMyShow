@@ -1,17 +1,16 @@
 package com.book.my.show.repository.specification;
 
+import com.book.my.show.entity.Auditorium;
 import com.book.my.show.entity.BookShowSeat;
 import com.book.my.show.entity.Seat;
-import com.book.my.show.entity.Theatre;
+import com.book.my.show.type.SeatStatus;
 import lombok.Builder;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.util.StringUtils;
 
 import javax.persistence.criteria.*;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 @Builder
 public class SeatSpecification extends SpecificationHelper implements Specification<Seat> {
@@ -27,7 +26,7 @@ public class SeatSpecification extends SpecificationHelper implements Specificat
     public Predicate toPredicate(Root<Seat> seatRoot, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
         List<Predicate> predicates = new ArrayList<>();
 
-        final Join<Seat, Theatre> auditoriumRoot = seatRoot.join("auditorium");
+        final Join<Seat, Auditorium> auditoriumRoot = seatRoot.join("auditorium");
         final Join<Seat, BookShowSeat> bookShowSeatRoot = seatRoot.join("bookShowSeats");
 
         if(StringUtils.hasLength(movieName)) {
@@ -37,7 +36,7 @@ public class SeatSpecification extends SpecificationHelper implements Specificat
 
         if(StringUtils.hasLength(showTime)) {
             predicates.add(criteriaBuilder.equal(criteriaBuilder.upper(bookShowSeatRoot
-                    .join("show").get("showTime")), showTime));
+                    .join("show").get("name")), showTime));
         }
 
         if(StringUtils.hasLength(theatreName)) {
@@ -53,6 +52,9 @@ public class SeatSpecification extends SpecificationHelper implements Specificat
                     .join("theatre").join("cities").get("name")), cityName));
         }
 
-       return getPredicate(criteriaBuilder, predicates);
+        //Filter out any booked/blocked seat
+        predicates.add(criteriaBuilder.equal(bookShowSeatRoot.get("status"), SeatStatus.OPEN));
+
+       return getPredicateWithAndOperation(criteriaBuilder, predicates);
     }
 }

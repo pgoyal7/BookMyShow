@@ -30,6 +30,6 @@ public class AuditoriumSpecification extends SpecificationHelper implements Spec
             predicates.add(criteriaBuilder.equal(criteriaBuilder.upper(theatreRoot.join("cities").get("name")), cityName));
         }
 
-        return getPredicate(criteriaBuilder, predicates);
+        return getPredicateWithAndOperation(criteriaBuilder, predicates);
     }
 }

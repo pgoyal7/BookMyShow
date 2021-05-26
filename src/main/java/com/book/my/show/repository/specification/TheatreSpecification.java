@@ -36,6 +36,6 @@ public class TheatreSpecification extends SpecificationHelper implements Specifi
             predicateList.add(criteriaBuilder.equal(criteriaBuilder.upper(theatreRoot.join("auditoriums").join("movie").get("name")), movieName));
         }
 
-        return getPredicate(criteriaBuilder, predicateList);
+        return getPredicateWithAndOperation(criteriaBuilder, predicateList);
     }
 }
