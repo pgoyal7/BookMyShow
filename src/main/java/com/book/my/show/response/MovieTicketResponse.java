@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Setter
 @Getter
 @NoArgsConstructor
-public class BookMovieTicketResponse implements Serializable {
+public class MovieTicketResponse implements Serializable {
     private static final long serialVersionUID = -4251977775679179922L;
 
     private String ticketId;
