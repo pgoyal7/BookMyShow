@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @Getter
 @NoArgsConstructor
-public class BookMovieTicket {//TODO CHECK ON EACH FIEDL INCLUDING ENUMCLASS PAYMENT TYPE ELSE BAD REQUEST
+public class MovieTicket {
     private UserInfo userInfo;
     private TheatreInfo theatreInfo;
     private PaymentType paymentType;
