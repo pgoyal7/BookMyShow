@@ -66,13 +66,13 @@ VALUES (16, 3, 36, null, 'OPEN', null, '2021-05-27', 0, 'SYSTEM', now(), 'SYSTEM
 
 -- Auditorium 5 show 1 i.e. (Morning9-12 Show) combination with 17(S511), 18(S512), 19(S521), 20(S522)
 INSERT INTO `book_show_seat` (`id`, `show_id`, `seat_id`, `ticket_id`, `seat_status`, `seat_book_time`, `show_day`, `version`, `created_by`, `created_on`, `updated_by`, `updated_on`)
-VALUES (17, 1, 17, null, 'BLOCKED', '2021-05-26 12:24:38.547', '2021-05-27', 0, 'SYSTEM', '2021-05-26 12:24:38.547', 'SYSTEM', '2021-05-26 12:24:38.547');
+VALUES (17, 1, 17, null, 'OPEN', null, '2021-05-27', 0, 'SYSTEM', now(), 'SYSTEM', now());
 
 INSERT INTO `book_show_seat` (`id`, `show_id`, `seat_id`, `ticket_id`, `seat_status`, `seat_book_time`, `show_day`, `version`, `created_by`, `created_on`, `updated_by`, `updated_on`)
-VALUES (18, 1, 18, null, 'BLOCKED', '2021-05-26 12:24:38.547', '2021-05-27', 0, 'SYSTEM', '2021-05-26 12:24:38.547', 'SYSTEM', '2021-05-26 12:24:38.547');
+VALUES (18, 1, 18, null, 'OPEN', null, '2021-05-27', 0, 'SYSTEM', now(), 'SYSTEM', now());
 
 INSERT INTO `book_show_seat` (`id`, `show_id`, `seat_id`, `ticket_id`, `seat_status`, `seat_book_time`, `show_day`, `version`, `created_by`, `created_on`, `updated_by`, `updated_on`)
-VALUES (19, 1, 19, null, 'BLOCKED', '2021-05-26 12:24:38.547', '2021-05-27', 0, 'SYSTEM', '2021-05-26 12:24:38.547', 'SYSTEM', '2021-05-26 12:24:38.547');
+VALUES (19, 1, 19, null, 'OPEN', null, '2021-05-27', 0, 'SYSTEM', now(), 'SYSTEM', now());
 
 INSERT INTO `book_show_seat` (`id`, `show_id`, `seat_id`, `ticket_id`, `seat_status`, `seat_book_time`, `show_day`, `version`, `created_by`, `created_on`, `updated_by`, `updated_on`)
 VALUES (20, 1, 20, null, 'OPEN', null, '2021-05-27', 0, 'SYSTEM', now(), 'SYSTEM', now());
