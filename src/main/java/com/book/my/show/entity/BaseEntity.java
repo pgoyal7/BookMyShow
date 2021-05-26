@@ -4,11 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.experimental.Accessors;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 
+@Accessors(chain = true)
 @Setter
 @Getter
 @NoArgsConstructor
@@ -19,6 +23,8 @@ public abstract class BaseEntity implements Serializable {
 
     private String createdBy;
     private String updatedBy;
+    @CreationTimestamp
     private LocalDateTime createdOn;
+    @UpdateTimestamp
     private LocalDateTime updatedOn;
 }
