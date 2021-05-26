@@ -34,10 +34,10 @@ INSERT INTO `seat` (`id`, `auditorium_id`, `seat_name`, `seat_type`, `created_by
 VALUES (10, 3, 'S312', 'SILVER', 'SYSTEM', now(), 'SYSTEM', now());
 
 INSERT INTO `seat` (`id`, `auditorium_id`, `seat_name`, `seat_type`, `created_by`, `created_on`, `updated_by`, `updated_on`)
-VALUES (11, 3, 'S321', 'PREMIUM', 'SYSTEM', now(), 'SYSTEM', now());
+VALUES (11, 3, 'S321', 'PLATINUM', 'SYSTEM', now(), 'SYSTEM', now());
 
 INSERT INTO `seat` (`id`, `auditorium_id`, `seat_name`, `seat_type`, `created_by`, `created_on`, `updated_by`, `updated_on`)
-VALUES (12, 3, 'S322', 'PREMIUM', 'SYSTEM', now(), 'SYSTEM', now());
+VALUES (12, 3, 'S322', 'PLATINUM', 'SYSTEM', now(), 'SYSTEM', now());
 
 
 --Auditorium 4 Seat
@@ -76,10 +76,10 @@ INSERT INTO `seat` (`id`, `auditorium_id`, `seat_name`, `seat_type`, `created_by
 VALUES (22, 6, 'S612', 'SILVER', 'SYSTEM', now(), 'SYSTEM', now());
 
 INSERT INTO `seat` (`id`, `auditorium_id`, `seat_name`, `seat_type`, `created_by`, `created_on`, `updated_by`, `updated_on`)
-VALUES (23, 6, 'S621', 'PREMIUM', 'SYSTEM', now(), 'SYSTEM', now());
+VALUES (23, 6, 'S621', 'PLATINUM', 'SYSTEM', now(), 'SYSTEM', now());
 
 INSERT INTO `seat` (`id`, `auditorium_id`, `seat_name`, `seat_type`, `created_by`, `created_on`, `updated_by`, `updated_on`)
-VALUES (24, 6, 'S622', 'PREMIUM', 'SYSTEM', now(), 'SYSTEM', now());
+VALUES (24, 6, 'S622', 'PLATINUM', 'SYSTEM', now(), 'SYSTEM', now());
 
 
 --Auditorium 7 Seat
@@ -118,8 +118,8 @@ INSERT INTO `seat` (`id`, `auditorium_id`, `seat_name`, `seat_type`, `created_by
 VALUES (34, 9, 'S912', 'GOLD', 'SYSTEM', now(), 'SYSTEM', now());
 
 INSERT INTO `seat` (`id`, `auditorium_id`, `seat_name`, `seat_type`, `created_by`, `created_on`, `updated_by`, `updated_on`)
-VALUES (35, 9, 'S921', 'PREMIUM', 'SYSTEM', now(), 'SYSTEM', now());
+VALUES (35, 9, 'S921', 'PLATINUM', 'SYSTEM', now(), 'SYSTEM', now());
 
 INSERT INTO `seat` (`id`, `auditorium_id`, `seat_name`, `seat_type`, `created_by`, `created_on`, `updated_by`, `updated_on`)
-VALUES (36, 9, 'S922', 'PREMIUM', 'SYSTEM', now(), 'SYSTEM', now());
+VALUES (36, 9, 'S922', 'PLATINUM', 'SYSTEM', now(), 'SYSTEM', now());
 -------

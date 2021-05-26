@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `ticket` (
     `user_id` INTEGER,
     `ticket_status` varchar(20),
     `ticket_id` varchar(50),
-    `ticker_amount` decimal(4, 2),
+    `ticket_amount` decimal(8, 2),
     `created_by` varchar(50),
     `created_on` timestamp NOT NULL,
     `updated_by` varchar(50),
