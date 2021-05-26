@@ -14,13 +14,9 @@ import java.util.List;
 
 @Repository
 public interface BookShowSeatRepository extends PagingAndSortingRepository<BookShowSeat, Long>, JpaSpecificationExecutor<BookShowSeat> {
-    /*@Query("SELECT COUNT(bss.id) FROM bookShowSeat bss WHERE bss.status = ?1 AND bss.updatedOn - ?3 > threshold AND bss.createdOn > ?3")
-    long findCountByStatusAndThresholdAndCreatedDate(@Param("status") SeatStatus status,
-                                                     @Param("threshold") LocalDateTime threshold,
-                                                     @Param("currentDateTime") LocalDateTime currentDateTime);
+    @Query("SELECT COUNT(bss.id) FROM BookShowSeat bss WHERE bss.status = ?1")
+    long findCountByStatusAndThresholdAndCreatedDate(@Param("status") SeatStatus status);
 
-    @Query("SELECT COUNT(bss.id) FROM bookShowSeat bss WHERE bss.status = ?1 AND bss.updatedOn - ?3 > threshold AND bss.createdOn > ?3")
-    List<BookShowSeat> findAllByStatusAndThresholdAndCreatedDate(@Param("status") SeatStatus status,
-                                                                 @Param("threshold") LocalDateTime threshold,
-                                                                 @Param("currentDateTime") LocalDateTime currentDateTime, Pageable pageable);*/
+    @Query("SELECT bss FROM BookShowSeat bss WHERE bss.status = ?1")
+    List<BookShowSeat> findAllByStatusAndThresholdAndCreatedDate(@Param("status") SeatStatus status, Pageable pageable);
 }
