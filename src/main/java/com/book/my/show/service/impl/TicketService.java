@@ -42,7 +42,7 @@ public class TicketService implements ITicketService {
         }
 
         log.info("Ticket history not present against userId : {}", userId);
-        throw new ContentNotFoundException(HttpStatus.OK, ErrorMapping.BMS006);
+        throw new ContentNotFoundException(HttpStatus.OK, ErrorMapping.BMS007);
     }
 
     @Cacheable("Ticket")

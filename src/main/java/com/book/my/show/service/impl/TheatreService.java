@@ -101,7 +101,6 @@ public class TheatreService implements ITheatreService {
         throw new ContentNotFoundException(HttpStatus.OK, ErrorMapping.BMS003);
     }
 
-    @Cacheable("AvailableSeats")
     @Override
     public AvailableSeatResponse getAvailableSeats(String cityName, String theatreName, String movieName, String showTime, String showDay) {
         SeatSpecification seatSpecification = SeatSpecification.builder()

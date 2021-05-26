@@ -9,8 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
@@ -26,7 +24,7 @@ public class CronService implements ICronService {
         this.bookShowSeatRepository = bookShowSeatRepository;
     }
 
-    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+    @Transactional
     @Override
     public void unblockSeatsIfThresholdExceed(SeatStatus seatStatus, LocalDateTime thresholdTime) {
         int offset = 0, limit = 20;
@@ -42,8 +40,8 @@ public class CronService implements ICronService {
         do {
             /*List<BookShowSeat> bookShowSeats = bookShowSeatRepository
                     .findAllByStatusAndThresholdAndCreatedDate(seatStatus, thresholdTime, LocalDateTime.now(), pageable);*/
-
             List<BookShowSeat> bookShowSeats = new ArrayList<>();
+
             log.info("Processing batch number : {}", pageable.getPageNumber());
             bookShowSeats.forEach((bookShowSeat) -> {
                 bookShowSeat.setStatus(SeatStatus.OPEN);
