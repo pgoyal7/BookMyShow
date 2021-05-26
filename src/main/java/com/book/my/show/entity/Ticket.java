@@ -28,7 +28,7 @@ public class Ticket extends BaseEntity {
     private BookStatus status;
     @Column(name = "ticket_id")
     private String ticketId;
-    @Column(name = "ticker_amount")
+    @Column(name = "ticket_amount")
     private double ticketAmount;
 
     @ManyToOne(fetch = FetchType.LAZY)
