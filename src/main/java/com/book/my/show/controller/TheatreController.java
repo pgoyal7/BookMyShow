@@ -43,7 +43,7 @@ public class TheatreController {
                 .ok().body(theatreService.getTheatresByCityAndMovie(cityName.toUpperCase(), movieName.toUpperCase()));
     }
 
-    @GetMapping(value = "/ext/v1/cities/{cityName}/theatres/{theatreName}/auditoriums/shows")
+    @GetMapping("/ext/v1/cities/{cityName}/theatres/{theatreName}/auditoriums/shows")
     public ResponseEntity<RunningShowResponse> getAuditoriumsAndShowsByTheatreAndCity(@PathVariable("cityName") String cityName,
                                                                       @PathVariable("theatreName") String theatreName) throws InstantiationException, IllegalAccessException {
         //Validation Layer
@@ -53,16 +53,16 @@ public class TheatreController {
                 .ok().body(theatreService.getAuditoriumsAndShowsByTheatreAndCity(theatreName.toUpperCase(), cityName.toUpperCase()));
     }
 
-    @GetMapping("/ext/v1/city/{cityName}/theatres/{theatreName}/movies/{movieName}/shows/{showTime}/showDates/{showDate}")
-        public ResponseEntity<AvailableSeatResponse> getAvailableSeats(@PathVariable("cityName") String cityName,
-                                                                       @PathVariable("theatreName") String theatreName, @PathVariable("movieName") String movieName,
-                                                                       @PathVariable("showTime") String showTime, @PathVariable("showDay") String showDay) throws InstantiationException, IllegalAccessException {
+    @GetMapping("/ext/v1/cities/{cityName}/theatres/{theatreName}/movies/{movieName}/shows/{showTime}/showDays/{showDay}/seats")
+    public ResponseEntity<AvailableSeatResponse> getAvailableSeats(@PathVariable("cityName") String cityName,
+                                                                   @PathVariable("theatreName") String theatreName, @PathVariable("movieName") String movieName,
+                                                                   @PathVariable("showTime") String showTime, @PathVariable("showDay") String showDay) throws InstantiationException, IllegalAccessException {
 
-        //Validation Layer
-        ValidationUtility.validate(servletRequest);
+    //Validation Layer
+    ValidationUtility.validate(servletRequest);
 
-        return ResponseEntity
-                .ok().body(theatreService.getAvailableSeats(cityName.toUpperCase(), theatreName.toUpperCase(),
-                        movieName.toUpperCase(), showTime.toUpperCase(), showDay));
+    return ResponseEntity
+            .ok().body(theatreService.getAvailableSeats(cityName.toUpperCase(), theatreName.toUpperCase(),
+                    movieName.toUpperCase(), showTime.toUpperCase(), showDay));
     }
 }
