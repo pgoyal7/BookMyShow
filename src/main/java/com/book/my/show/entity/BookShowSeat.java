@@ -16,7 +16,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @Table(name = "book_show_seat")
 @Entity
-public class BookShowSeat extends BaseEntity{
+public class BookShowSeat extends BaseEntity {
     private static final long serialVersionUID = 6306307587603459855L;
 
     @Id
