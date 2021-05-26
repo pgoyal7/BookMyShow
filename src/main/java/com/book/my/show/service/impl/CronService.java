@@ -41,7 +41,7 @@ public class CronService implements ICronService {
 
         Pageable pageable = PageRequest.of(offset, limit);
 
-        do {
+        while(pageable.getOffset() < count) {
             List<BookShowSeat> bookShowSeats = bookShowSeatRepository
                     .findAllByStatusAndThresholdAndCreatedDate(seatStatus, pageable);
 
@@ -63,6 +63,6 @@ public class CronService implements ICronService {
 
             bookShowSeatRepository.saveAll(bookShowSeats);
             pageable = pageable.next();
-        } while(pageable.getOffset() < count);
+        }
     }
 }
