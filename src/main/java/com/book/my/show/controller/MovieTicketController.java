@@ -5,7 +5,7 @@ import com.book.my.show.response.MovieTicketResponse;
 import com.book.my.show.service.IMovieTicketService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,7 +23,7 @@ public class MovieTicketController {
         this.bookMovieTicketService = bookMovieTicketService;
     }
 
-    @PostMapping("/ext/v1/theatre/auditorium/movie/seats")
+    @PutMapping("/ext/v1/theatre/auditorium/movie/seats")
     public ResponseEntity<MovieTicketResponse> bookMovieTicket(
             @Valid @NotNull @RequestBody MovieTicketRequest movieTicketRequest) throws Exception {
         return ResponseEntity
